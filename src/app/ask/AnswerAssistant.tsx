@@ -150,25 +150,45 @@ export default function AnswerAssistant() {
                   }}
                 >
                   <span>{lang.toUpperCase()}</span>
-                  <button
-                    onClick={() => copyToClipboard(code, `code-${idx}`)}
-                    style={{
-                      background: "transparent",
-                      border: "none",
-                      color: "var(--text-muted)",
-                      cursor: "pointer",
-                      fontSize: "0.75rem",
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "0.3rem",
-                    }}
-                  >
-                    {copiedCode === `code-${idx}` ? (
-                      <span style={{ color: "var(--accent-emerald)" }}>✓ Copied</span>
-                    ) : (
-                      "Copy Code"
-                    )}
-                  </button>
+                  <div style={{ display: "flex", gap: "0.6rem", alignItems: "center" }}>
+                    <Link
+                      href="/sandbox"
+                      style={{
+                        background: "rgba(99, 102, 241, 0.15)",
+                        border: "1px solid rgba(99, 102, 241, 0.3)",
+                        color: "#c084fc",
+                        borderRadius: "4px",
+                        padding: "0.15rem 0.5rem",
+                        fontSize: "0.725rem",
+                        textDecoration: "none",
+                        fontWeight: 600,
+                        display: "inline-flex",
+                        alignItems: "center",
+                        gap: "0.25rem",
+                      }}
+                    >
+                      <span>⚡</span> Run in Sandbox
+                    </Link>
+                    <button
+                      onClick={() => copyToClipboard(code, `code-${idx}`)}
+                      style={{
+                        background: "transparent",
+                        border: "none",
+                        color: "var(--text-muted)",
+                        cursor: "pointer",
+                        fontSize: "0.75rem",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "0.3rem",
+                      }}
+                    >
+                      {copiedCode === `code-${idx}` ? (
+                        <span style={{ color: "var(--accent-emerald)" }}>✓ Copied</span>
+                      ) : (
+                        "Copy Code"
+                      )}
+                    </button>
+                  </div>
                 </div>
                 <pre style={{ margin: 0, padding: "1rem", overflowX: "auto", fontFamily: "var(--font-mono)", fontSize: "0.85rem", color: "#e2e8f0" }}>
                   <code>{code}</code>

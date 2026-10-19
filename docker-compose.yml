@@ -64,6 +64,30 @@ services:
     networks:
       - edutech-network
 
+  # ==========================================
+  # Hardened Code Execution Sandbox
+  # Build with: docker compose build sandbox
+  # Run with: docker compose --profile sandbox run --rm sandbox
+  # ==========================================
+  sandbox:
+    build:
+      context: ./docker/sandbox
+      dockerfile: Dockerfile
+    image: edutech-sandbox:latest
+    profiles: ["sandbox", "tools"]
+    container_name: edutech-sandbox
+    mem_limit: 512m
+    cpus: 1.0
+    pids_limit: 64
+    network_mode: none
+    user: "10001:10001"
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    stdin_open: true
+    tty: false
+
 volumes:
   postgres_data:
     name: edutech_postgres_data

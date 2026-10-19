@@ -79,6 +79,11 @@ export default function RootLayout({
                   </Link>
                 </li>
                 <li>
+                  <Link href="/sandbox" className="nav-link">
+                    Docker Sandbox
+                  </Link>
+                </li>
+                <li>
                   <a href="#docker-architecture" className="nav-link">
                     Docker & DB Stack
                   </a>

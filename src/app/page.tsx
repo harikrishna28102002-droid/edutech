@@ -57,6 +57,9 @@ export default function Home() {
           <Link href="/ask" className="btn btn-secondary">
             🤖 AI Answer Assistant
           </Link>
+          <Link href="/sandbox" className="btn btn-secondary">
+            🐳 Docker Sandbox
+          </Link>
           <a href="#docker-architecture" className="btn btn-secondary">
             View Docker Stack
           </a>

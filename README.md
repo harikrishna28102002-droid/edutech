@@ -163,6 +163,24 @@ User Question ──> Hybrid Retrieval (RRF) ──> Context Assembly ──> Mo
 
 ---
 
+## 🐳 Docker Code Execution Sandbox
+
+EduTech provides a hardened, ephemeral container environment for safely running and testing AI-generated or custom Python code:
+
+* **Security Boundaries**:
+  * **Memory Limits**: `--memory=512m` (configurable to 256m/1g).
+  * **CPU Quota**: `--cpus=1.0` and `--pids-limit=64` to prevent fork bombs or CPU starvation.
+  * **Network Isolation**: `--net=none` to prevent unauthorized network egress.
+  * **Unprivileged Execution**: Non-root user `sandbox` (`UID 10001:10001`).
+  * **Privilege Restrictions**: `--security-opt=no-new-privileges` and `--cap-drop=ALL`.
+  * **Watchdog Timeout**: Strict 10-second automatic execution abort.
+* **Pre-installed FastAPI Test Suite**: `fastapi==0.115.8`, `uvicorn`, `pydantic==2.10.6`, `httpx`, `pytest`, `pytest-asyncio`.
+* **Interactive Web Playground**: Accessible at `/sandbox` with sample test suites (TestClient verification, Dependency Injection lifecycles, and Pydantic validation).
+* **AI Assistant Integration**: 1-click **"⚡ Run in Sandbox"** button on every code snippet in `/ask`.
+* **CLI Runner**: `npm run sandbox:run`
+
+---
+
 ## 📡 REST API Reference
 
 | Endpoint | Method | Description |
@@ -179,6 +197,8 @@ User Question ──> Hybrid Retrieval (RRF) ──> Context Assembly ──> Mo
 | `/api/search/status` | `GET` | Returns vector dimension (384), total chunks, and retrieval engine status. |
 | `/api/answer` | `POST` | Runs the full RAG Answer Pipeline. Supports Server-Sent Events (SSE) streaming (`stream: true`) and JSON fallback (`stream: false`). |
 | `/api/answer/models` | `GET` | Returns available model providers, connectivity status, and active default engine. |
+| `/api/sandbox/run` | `POST` | Executes Python code inside the Docker sandbox with resource and network isolation. |
+| `/api/sandbox/status` | `GET` | Returns Docker sandbox image status, pre-installed packages, and security policies. |
 
 ---
 
