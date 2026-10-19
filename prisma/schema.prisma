@@ -260,3 +260,86 @@ model SyncLog {
   @@map("sync_logs")
 }
 
+model EvalBenchmark {
+  id          String         @id @default(cuid())
+  name        String         @unique
+  description String?
+  sourceRepo  String         @default("tiangolo/fastapi")
+  totalCases  Int            @default(0)
+  testCases   EvalTestCase[]
+  runs        EvalRun[]
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+
+  @@map("eval_benchmarks")
+}
+
+model EvalTestCase {
+  id               String        @id @default(cuid())
+  benchmarkId      String
+  benchmark        EvalBenchmark @relation(fields: [benchmarkId], references: [id], onDelete: Cascade)
+
+  discussionNumber Int?
+  discussionUrl    String?
+  category         String
+  question         String        @db.Text
+  referenceAnswer  String        @db.Text
+  targetDocPath    String?
+  verificationCode String?       @db.Text
+  tags             String[]
+
+  results          EvalResult[]
+
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+
+  @@index([benchmarkId, category])
+  @@map("eval_test_cases")
+}
+
+model EvalRun {
+  id               String        @id @default(cuid())
+  benchmarkId      String
+  benchmark        EvalBenchmark @relation(fields: [benchmarkId], references: [id], onDelete: Cascade)
+
+  status           String        @default("RUNNING") // RUNNING, COMPLETED, FAILED
+  modelProvider    String        @default("local")
+  totalTests       Int           @default(0)
+  passedTests      Int           @default(0)
+  codePassRate     Float         @default(0.0)
+  retrievalHitRate Float         @default(0.0)
+  avgLatencyMs     Int           @default(0)
+
+  results          EvalResult[]
+
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+
+  @@index([benchmarkId, createdAt])
+  @@map("eval_runs")
+}
+
+model EvalResult {
+  id              String       @id @default(cuid())
+  runId           String
+  run             EvalRun      @relation(fields: [runId], references: [id], onDelete: Cascade)
+  testCaseId      String
+  testCase        EvalTestCase @relation(fields: [testCaseId], references: [id], onDelete: Cascade)
+
+  generatedAnswer String       @db.Text
+  retrievedSources Json
+  retrievalHit    Boolean      @default(false)
+  codeExecuted    Boolean      @default(false)
+  codePassed      Boolean      @default(false)
+  sandboxStdout   String?      @db.Text
+  sandboxStderr   String?      @db.Text
+  latencyMs       Int          @default(0)
+  score           Float        @default(0.0)
+
+  createdAt       DateTime     @default(now())
+
+  @@index([runId])
+  @@index([testCaseId])
+  @@map("eval_results")
+}
+

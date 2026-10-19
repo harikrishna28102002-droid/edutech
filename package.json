@@ -19,6 +19,7 @@
     "search:embed": "tsx scripts/embed-chunks.ts",
     "rag:answer": "tsx scripts/run-answer.ts",
     "sandbox:run": "tsx scripts/run-sandbox.ts",
+    "eval:run": "tsx scripts/run-eval.ts",
     "docker:up": "docker compose up -d",
     "docker:down": "docker compose down",
     "docker:logs": "docker compose logs -f"

@@ -60,6 +60,9 @@ export default function Home() {
           <Link href="/sandbox" className="btn btn-secondary">
             🐳 Docker Sandbox
           </Link>
+          <Link href="/eval" className="btn btn-secondary">
+            📊 Eval Suite
+          </Link>
           <a href="#docker-architecture" className="btn btn-secondary">
             View Docker Stack
           </a>

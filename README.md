@@ -181,6 +181,33 @@ EduTech provides a hardened, ephemeral container environment for safely running 
 
 ---
 
+## 📊 Evaluation Benchmark Suite (Real GitHub Discussions)
+
+EduTech includes an end-to-end evaluation benchmark suite derived directly from official answered developer discussions on [`tiangolo/fastapi`](https://github.com/fastapi/fastapi/discussions):
+
+* **Real Scenarios (Top 10)**:
+  1. `#4823`: Dependency Injection with sub-dependencies and `Depends`.
+  2. `#5841`: Database session lifecycle and automatic teardown cleanup with `yield`.
+  3. `#9342`: Path parameters, type validation, and automatic HTTP 422 error handling.
+  4. `#3210`: Path parameters vs URL query parameters in route functions.
+  5. `#1456`: Packaging and deploying FastAPI applications in Docker for production.
+  6. `#3205`: `async def` vs standard `def` execution in Starlette threadpools.
+  7. `#4112`: Unit and integration testing with HTTPX `TestClient`.
+  8. `#3901`: Background tasks execution after HTTP response dispatch.
+  9. `#2104`: CORS (`CORSMiddleware`) headers and preflight handling.
+  10. `#5190`: Custom `RequestValidationError` response payload handlers.
+* **Evaluation Pipeline & Scoring**:
+  * **Retrieval Hit Rate (40%)**: Verifies that the hybrid search engine correctly identifies the canonical FastAPI documentation reference.
+  * **Sandbox Code Pass Rate (40%)**: Executes real Python assertions in the isolated Docker Sandbox with HTTPX `TestClient`.
+  * **Answer Synthesis Quality (20%)**: Validates completeness, structure, and actionable code examples.
+* **Interactive Evaluation Dashboard**: Accessible at `/eval` with real-time test execution, per-discussion results, code inspections, and sandbox logs.
+* **CLI Runner**:
+  ```bash
+  npm run eval:run
+  ```
+
+---
+
 ## 📡 REST API Reference
 
 | Endpoint | Method | Description |
@@ -199,6 +226,9 @@ EduTech provides a hardened, ephemeral container environment for safely running 
 | `/api/answer/models` | `GET` | Returns available model providers, connectivity status, and active default engine. |
 | `/api/sandbox/run` | `POST` | Executes Python code inside the Docker sandbox with resource and network isolation. |
 | `/api/sandbox/status` | `GET` | Returns Docker sandbox image status, pre-installed packages, and security policies. |
+| `/api/eval/dataset` | `GET` | Returns the 10 real GitHub Discussions evaluation cases, categories, and tags. |
+| `/api/eval/run` | `POST` | Executes the evaluation benchmark suite across all 10 test cases and returns composite metrics. |
+| `/api/eval/runs` | `GET` | Returns historical evaluation benchmark runs and pass rate trends. |
 
 ---
 

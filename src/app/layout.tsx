@@ -84,6 +84,11 @@ export default function RootLayout({
                   </Link>
                 </li>
                 <li>
+                  <Link href="/eval" className="nav-link">
+                    Evals &amp; Benchmarks
+                  </Link>
+                </li>
+                <li>
                   <a href="#docker-architecture" className="nav-link">
                     Docker & DB Stack
                   </a>
