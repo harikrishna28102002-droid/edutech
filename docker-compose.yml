@@ -1,0 +1,74 @@
+services:
+  # ==========================================
+  # PostgreSQL Database Service
+  # ==========================================
+  db:
+    image: postgres:16-alpine
+    container_name: edutech-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-edutech_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-edutech_secure_pass123}
+      POSTGRES_DB: ${POSTGRES_DB:-edutech_db}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-edutech_user} -d ${POSTGRES_DB:-edutech_db}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - edutech-network
+
+  # ==========================================
+  # Next.js Full-Stack Web Application
+  # ==========================================
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: edutech-app
+    restart: unless-stopped
+    ports:
+      - "${PORT:-3000}:3000"
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      DATABASE_URL: postgresql://${POSTGRES_USER:-edutech_user}:${POSTGRES_PASSWORD:-edutech_secure_pass123}@db:5432/${POSTGRES_DB:-edutech_db}?schema=public
+      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL:-http://localhost:3000}
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - edutech-network
+
+  # ==========================================
+  # Database Migration & Seed Helper (One-Off Profile)
+  # Run with: docker compose --profile tools run --rm db-setup
+  # ==========================================
+  db-setup:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: deps
+    profiles: ["tools"]
+    container_name: edutech-db-setup
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-edutech_user}:${POSTGRES_PASSWORD:-edutech_secure_pass123}@db:5432/${POSTGRES_DB:-edutech_db}?schema=public
+    command: sh -c "npx prisma db push && npx tsx prisma/seed.ts"
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - edutech-network
+
+volumes:
+  postgres_data:
+    name: edutech_postgres_data
+
+networks:
+  edutech-network:
+    name: edutech-network
+    driver: bridge
