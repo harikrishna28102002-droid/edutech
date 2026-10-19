@@ -144,6 +144,25 @@ EduTech implements a multi-stage retrieval architecture for AI-assisted document
 
 ---
 
+## 🤖 Model Serving & RAG Answer Pipeline
+
+EduTech features an end-to-end question answering pipeline:
+
+```text
+User Question ──> Hybrid Retrieval (RRF) ──> Context Assembly ──> Model Gateway ──> Streaming Answer + Verified Citations
+```
+
+* **Universal Model Gateway** (`src/lib/model-server.ts`):
+  * **Built-in Local RAG Synthesizer**: High-precision deterministic inference grounded in retrieved FastAPI documentation chunks (zero keys, zero cost, instant).
+  * **Ollama Adapter**: Streams from local open-weights models (`llama3`, `mistral`, `qwen2.5`, `deepseek-r1`) running on `http://localhost:11434`.
+  * **Cloud Adapters**: Optional OpenAI (`gpt-4o-mini`) and Google Gemini streaming adapters.
+* **Server-Sent Events (SSE) Streaming**: Token-by-token streaming response with live typing cursor and copyable Python code snippets.
+* **Citation Verification**: Every generated answer includes grounded reference tags (`[1]`, `[2]`) linked to source documentation chunks and GitHub URLs.
+* **Interactive UI**: Accessible at `/ask` with prompt suggestions and retrieval telemetry.
+* **CLI Runner**: `npm run rag:answer -- "How to use Depends in FastAPI?"`
+
+---
+
 ## 📡 REST API Reference
 
 | Endpoint | Method | Description |
@@ -158,6 +177,8 @@ EduTech implements a multi-stage retrieval architecture for AI-assisted document
 | `/api/search` | `GET` / `POST` | Executes Hybrid Search (RRF) with contextual reranking. Supports `query`, `mode` (`hybrid`, `vector`, `keyword`), `limit`, and `rerank`. |
 | `/api/search/embed` | `POST` | Triggers chunking and vector embedding generation for all documentation in PostgreSQL. |
 | `/api/search/status` | `GET` | Returns vector dimension (384), total chunks, and retrieval engine status. |
+| `/api/answer` | `POST` | Runs the full RAG Answer Pipeline. Supports Server-Sent Events (SSE) streaming (`stream: true`) and JSON fallback (`stream: false`). |
+| `/api/answer/models` | `GET` | Returns available model providers, connectivity status, and active default engine. |
 
 ---
 

@@ -54,6 +54,9 @@ export default function Home() {
           <Link href="/search" className="btn btn-secondary">
             🔍 Hybrid Search &amp; Reranker
           </Link>
+          <Link href="/ask" className="btn btn-secondary">
+            🤖 AI Answer Assistant
+          </Link>
           <a href="#docker-architecture" className="btn btn-secondary">
             View Docker Stack
           </a>

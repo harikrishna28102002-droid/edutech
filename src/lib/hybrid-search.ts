@@ -153,40 +153,45 @@ export async function hybridSearch(options: {
   let fusionMs = 0;
   let rerankMs = 0;
 
-  // 1. Fetch chunks from PostgreSQL database
-  let chunks = await prisma.docChunk.findMany({
-    include: {
-      page: {
-        select: {
-          title: true,
-          slug: true,
-          path: true,
-          category: true,
-          githubUrl: true,
-        },
-      },
-    },
-  });
-
-  // If no chunks exist, auto-index doc pages if they exist
-  if (chunks.length === 0) {
-    const pageCount = await prisma.docPage.count();
-    if (pageCount > 0) {
-      await embedAllDocPages();
-      chunks = await prisma.docChunk.findMany({
-        include: {
-          page: {
-            select: {
-              title: true,
-              slug: true,
-              path: true,
-              category: true,
-              githubUrl: true,
-            },
+  // 1. Fetch chunks from PostgreSQL database (with resilient fallback if DB starting)
+  let chunks: any[] = [];
+  try {
+    chunks = await prisma.docChunk.findMany({
+      include: {
+        page: {
+          select: {
+            title: true,
+            slug: true,
+            path: true,
+            category: true,
+            githubUrl: true,
           },
         },
-      });
+      },
+    });
+
+    // If no chunks exist, auto-index doc pages if they exist
+    if (chunks.length === 0) {
+      const pageCount = await prisma.docPage.count();
+      if (pageCount > 0) {
+        await embedAllDocPages();
+        chunks = await prisma.docChunk.findMany({
+          include: {
+            page: {
+              select: {
+                title: true,
+                slug: true,
+                path: true,
+                category: true,
+                githubUrl: true,
+              },
+            },
+          },
+        });
+      }
     }
+  } catch (dbErr) {
+    // Database starting or offline - fallback to core in-memory chunks
   }
 
   // Format candidate records

@@ -74,6 +74,11 @@ export default function RootLayout({
                   </Link>
                 </li>
                 <li>
+                  <Link href="/ask" className="nav-link">
+                    AI Assistant
+                  </Link>
+                </li>
+                <li>
                   <a href="#docker-architecture" className="nav-link">
                     Docker & DB Stack
                   </a>
