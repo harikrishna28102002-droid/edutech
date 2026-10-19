@@ -51,6 +51,9 @@ export default function Home() {
           <Link href="/docs/fastapi" className="btn btn-secondary">
             ⚡ FastAPI Docs Hub
           </Link>
+          <Link href="/search" className="btn btn-secondary">
+            🔍 Hybrid Search &amp; Reranker
+          </Link>
           <a href="#docker-architecture" className="btn btn-secondary">
             View Docker Stack
           </a>

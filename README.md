@@ -118,6 +118,7 @@ EduTech includes an automated ingestion pipeline that connects directly to the o
 | `npm run build` | Produces optimized production Next.js standalone build |
 | `npm run start` | Starts production Next.js server |
 | `npm run sync:fastapi` | Ingests & synchronizes real FastAPI docs from GitHub into PostgreSQL |
+| `npm run search:embed` | Chunks and generates 384-dim dense vector embeddings for all doc pages |
 | `npm run prisma:generate` | Generates latest Prisma Client types |
 | `npm run prisma:push` | Pushes Prisma schema changes directly to PostgreSQL |
 | `npm run prisma:migrate` | Runs formal Prisma migrations in development |
@@ -126,6 +127,20 @@ EduTech includes an automated ingestion pipeline that connects directly to the o
 | `npm run docker:up` | Runs `docker compose up -d` |
 | `npm run docker:down` | Runs `docker compose down` |
 | `npm run docker:logs` | Streams live Docker Compose logs |
+
+---
+
+## 🔍 Hybrid Search & Neural Reranking Engine
+
+EduTech implements a multi-stage retrieval architecture for AI-assisted documentation search:
+
+1. **Context-Preserving Chunking**: Breaks documentation into semantic sections while preserving Markdown header paths (`H1 > H2 > H3`), keeping code blocks intact, and maintaining contextual overlap.
+2. **Dense Vector Embeddings**: 384-dimensional dense semantic vectors generated deterministically with zero external API dependencies (with optional `OPENAI_API_KEY` override).
+3. **Sparse Lexical Search**: Full Okapi BM25 index with tunable hyperparameters ($k_1 = 1.5, b = 0.75$).
+4. **Reciprocal Rank Fusion (RRF)**: Merges dense and sparse ranks with smoothing constant $k = 60$:
+   $$RRF\_Score(d) = \frac{1}{60 + Rank_{dense}(d)} + \frac{1}{60 + Rank_{sparse}(d)}$$
+5. **Contextual Cross-Score Reranking**: Re-evaluates top hybrid candidates using exact phrase matching, heading alignment bonuses, code block presence matching, and semantic cosine similarity.
+6. **Interactive Search Playground**: Accessible at `/search` with live latency metrics, score breakdowns, and mode toggles.
 
 ---
 
@@ -140,6 +155,9 @@ EduTech includes an automated ingestion pipeline that connects directly to the o
 | `/api/sync/fastapi` | `POST` | Triggers GitHub ingestion and updates the local PostgreSQL database and LMS course. Supports `{ "force": true }`. |
 | `/api/docs/fastapi` | `GET` | Returns list of ingested FastAPI docs grouped by category with search filter (`?q=term`). |
 | `/api/docs/fastapi/[slug]` | `GET` | Fetches full markdown content of a specific documentation page with prev/next navigation. |
+| `/api/search` | `GET` / `POST` | Executes Hybrid Search (RRF) with contextual reranking. Supports `query`, `mode` (`hybrid`, `vector`, `keyword`), `limit`, and `rerank`. |
+| `/api/search/embed` | `POST` | Triggers chunking and vector embedding generation for all documentation in PostgreSQL. |
+| `/api/search/status` | `GET` | Returns vector dimension (384), total chunks, and retrieval engine status. |
 
 ---
 

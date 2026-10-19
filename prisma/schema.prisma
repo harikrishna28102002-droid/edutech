@@ -207,7 +207,9 @@ model DocPage {
   content     String    @db.Text
   excerpt     String?   @db.Text
   contentSha  String
-  orderIndex  Int       @default(0)
+  orderIndex  Int        @default(0)
+
+  chunks      DocChunk[]
 
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
@@ -216,6 +218,26 @@ model DocPage {
   @@index([sourceId, category])
   @@index([slug])
   @@map("doc_pages")
+}
+
+model DocChunk {
+  id          String    @id @default(cuid())
+  pageId      String
+  page        DocPage   @relation(fields: [pageId], references: [id], onDelete: Cascade)
+
+  chunkIndex  Int
+  heading     String?
+  headingPath String?
+  content     String    @db.Text
+  tokenCount  Int       @default(0)
+  embedding   Float[]
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([pageId])
+  @@index([chunkIndex])
+  @@map("doc_chunks")
 }
 
 model SyncLog {
