@@ -48,6 +48,9 @@ export default function Home() {
               <path d="m12 5 7 7-7 7" />
             </svg>
           </Link>
+          <Link href="/docs/fastapi" className="btn btn-secondary">
+            ⚡ FastAPI Docs Hub
+          </Link>
           <a href="#docker-architecture" className="btn btn-secondary">
             View Docker Stack
           </a>

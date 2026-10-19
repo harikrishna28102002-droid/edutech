@@ -64,6 +64,11 @@ export default function RootLayout({
                   </Link>
                 </li>
                 <li>
+                  <Link href="/docs/fastapi" className="nav-link">
+                    FastAPI Docs
+                  </Link>
+                </li>
+                <li>
                   <a href="#docker-architecture" className="nav-link">
                     Docker & DB Stack
                   </a>

@@ -172,3 +172,69 @@ model Review {
   @@unique([userId, courseId])
   @@map("reviews")
 }
+
+model DocSource {
+  id            String    @id @default(cuid())
+  name          String    @unique
+  repo          String
+  branch        String    @default("master")
+  docsPath      String    @default("docs/en/docs")
+  lastCommitSha String?
+  lastSyncAt    DateTime?
+  syncStatus    String    @default("IDLE") // IDLE, SYNCING, SUCCESS, ERROR
+  syncError     String?   @db.Text
+  pagesCount    Int       @default(0)
+
+  pages         DocPage[]
+  syncLogs      SyncLog[]
+
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@map("doc_sources")
+}
+
+model DocPage {
+  id          String    @id @default(cuid())
+  sourceId    String
+  source      DocSource @relation(fields: [sourceId], references: [id], onDelete: Cascade)
+
+  title       String
+  slug        String
+  category    String    @default("general")
+  path        String
+  githubUrl   String
+  content     String    @db.Text
+  excerpt     String?   @db.Text
+  contentSha  String
+  orderIndex  Int       @default(0)
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@unique([sourceId, path])
+  @@index([sourceId, category])
+  @@index([slug])
+  @@map("doc_pages")
+}
+
+model SyncLog {
+  id             String    @id @default(cuid())
+  sourceId       String
+  source         DocSource @relation(fields: [sourceId], references: [id], onDelete: Cascade)
+
+  status         String    // SUCCESS, FAILED, IN_PROGRESS
+  addedCount     Int       @default(0)
+  updatedCount   Int       @default(0)
+  unchangedCount Int       @default(0)
+  totalCount     Int       @default(0)
+  commitSha      String?
+  message        String?   @db.Text
+  durationMs     Int       @default(0)
+
+  createdAt      DateTime  @default(now())
+
+  @@index([sourceId, createdAt])
+  @@map("sync_logs")
+}
+

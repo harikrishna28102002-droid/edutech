@@ -89,6 +89,24 @@ The database is built on **PostgreSQL** and managed using **Prisma ORM**. The LM
 | **`Enrollment`** | Student course registration and aggregate progress % | User, Course |
 | **`LessonProgress`**| Granular completion tracking and playback timestamp | User, Lesson |
 | **`Review`** | Student 1-5 star ratings and written reviews | User, Course |
+| **`DocSource`** | Ingested GitHub repositories (`tiangolo/fastapi`, commit SHA, sync status) | DocPages, SyncLogs |
+| **`DocPage`** | Ingested markdown documentation (title, category, path, content, SHA) | DocSource |
+| **`SyncLog`** | History of sync jobs (added, updated, unchanged counts, commit SHA) | DocSource |
+
+---
+
+## ⚡ FastAPI GitHub Ingestion & Sync Pipeline
+
+EduTech includes an automated ingestion pipeline that connects directly to the official [tiangolo/fastapi](https://github.com/tiangolo/fastapi) repository:
+
+1. **Commit-Aware Ingestion**: Checks latest upstream commit SHA and compares git blob SHAs to only fetch new or updated markdown documents.
+2. **Dual-Mode Presentation**:
+   - **Documentation Hub** (`/docs/fastapi`): Split-view markdown reader with search, category filtering, and 1-click sync button.
+   - **Auto-Generated LMS Course** (`/courses`): Automatically maps ingested documentation into structured curriculum modules and lessons.
+3. **Continuous Synchronization**:
+   - **Web UI**: 1-click `Sync Now` trigger on the `/docs/fastapi` dashboard.
+   - **CLI Script**: `npm run sync:fastapi` (or `npm run sync:fastapi -- --force`).
+   - **REST API**: `POST /api/sync/fastapi`.
 
 ---
 
@@ -99,6 +117,7 @@ The database is built on **PostgreSQL** and managed using **Prisma ORM**. The LM
 | `npm run dev` | Starts local Next.js development server with hot-reload |
 | `npm run build` | Produces optimized production Next.js standalone build |
 | `npm run start` | Starts production Next.js server |
+| `npm run sync:fastapi` | Ingests & synchronizes real FastAPI docs from GitHub into PostgreSQL |
 | `npm run prisma:generate` | Generates latest Prisma Client types |
 | `npm run prisma:push` | Pushes Prisma schema changes directly to PostgreSQL |
 | `npm run prisma:migrate` | Runs formal Prisma migrations in development |
@@ -117,6 +136,10 @@ The database is built on **PostgreSQL** and managed using **Prisma ORM**. The LM
 | `/api/health` | `GET` | Healthcheck reporting PostgreSQL connection status, latency, uptime, and database counts. |
 | `/api/courses` | `GET` | Fetches published courses with modules, lessons, instructor details, and ratings. Supports `?category=slug`, `?level=BEGINNER`, `?q=search`. |
 | `/api/stats` | `GET` | Returns platform aggregates (total courses, students, instructors, lessons, enrollments). |
+| `/api/sync/fastapi` | `GET` | Checks FastAPI sync status, tracked commit SHA, and recent sync audit logs. |
+| `/api/sync/fastapi` | `POST` | Triggers GitHub ingestion and updates the local PostgreSQL database and LMS course. Supports `{ "force": true }`. |
+| `/api/docs/fastapi` | `GET` | Returns list of ingested FastAPI docs grouped by category with search filter (`?q=term`). |
+| `/api/docs/fastapi/[slug]` | `GET` | Fetches full markdown content of a specific documentation page with prev/next navigation. |
 
 ---
 
