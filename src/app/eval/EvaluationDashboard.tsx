@@ -104,6 +104,9 @@ export default function EvaluationDashboard({
           </div>
 
           <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", flexWrap: "wrap" }}>
+            <Link href="/eval/compare" className="btn btn-secondary" style={{ display: "flex", alignItems: "center", gap: "0.4rem" }}>
+              🏆 Compare Base Models
+            </Link>
             <button
               onClick={handleRunEvaluation}
               disabled={isRunning}
