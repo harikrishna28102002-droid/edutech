@@ -63,6 +63,9 @@ export default function Home() {
           <Link href="/eval" className="btn btn-secondary">
             📊 Eval Suite
           </Link>
+          <Link href="/training" className="btn btn-secondary">
+            🧠 Training Data Studio
+          </Link>
           <a href="#docker-architecture" className="btn btn-secondary">
             View Docker Stack
           </a>

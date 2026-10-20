@@ -89,6 +89,11 @@ export default function RootLayout({
                   </Link>
                 </li>
                 <li>
+                  <Link href="/training" className="nav-link">
+                    Training Data
+                  </Link>
+                </li>
+                <li>
                   <a href="#docker-architecture" className="nav-link">
                     Docker & DB Stack
                   </a>

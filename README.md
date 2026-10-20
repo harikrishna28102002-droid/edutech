@@ -208,6 +208,30 @@ EduTech includes an end-to-end evaluation benchmark suite derived directly from 
 
 ---
 
+## 🧠 AI Training Data Studio (Real Doc Chunks)
+
+EduTech includes an automated **LLM Training Dataset Generator** that extracts real technical documentation chunks and synthesizes high-quality fine-tuning pairs:
+
+* **Sourced from Real Documentation Chunks**:
+  * Parses official documentation (`tutorial/first-steps.md`, `tutorial/path-params.md`, `tutorial/dependencies/index.md`, `deployment/docker.md`, `tutorial/cors.md`, `tutorial/background-tasks.md`).
+  * Extracts code blocks, parameter validations, terminal commands, and architectural patterns.
+* **Supported Fine-Tuning Formats**:
+  * **🦙 Alpaca**: `{ "instruction": "...", "input": "...", "output": "...", "metadata": {...} }`
+  * **💬 ChatML / OpenAI**: `{ "messages": [{ "role": "system", ... }, { "role": "user", ... }, { "role": "assistant", ... }] }`
+  * **⚖️ DPO (Direct Preference Optimization)**: `{ "prompt": "...", "chosen": "...", "rejected": "..." }` (contrasts modern `Annotated` syntax against common real-world anti-patterns).
+  * **🔍 Dense Retrieval Triplets**: `{ "query": "...", "positive": "...", "negative": "..." }` for fine-tuning bi-encoder embedding models.
+* **Train / Val / Test Partitioning**:
+  * Automated configurable dataset splitting (default: **80% Train**, **10% Validation**, **10% Test**).
+* **Interactive Web Studio**:
+  * Accessible at `/training` with live sample explorer, multi-format code viewer, and 1-click `.jsonl` / `.json` exports.
+* **CLI Runner**:
+  ```bash
+  npm run train:build
+  ```
+  Exports verified datasets to `data/training/fastapi_alpaca_train.jsonl`, `data/training/fastapi_chatml.jsonl`, `data/training/fastapi_dpo.jsonl`, and `data/training/fastapi_triplets.jsonl`.
+
+---
+
 ## 📡 REST API Reference
 
 | Endpoint | Method | Description |
@@ -229,6 +253,9 @@ EduTech includes an end-to-end evaluation benchmark suite derived directly from 
 | `/api/eval/dataset` | `GET` | Returns the 10 real GitHub Discussions evaluation cases, categories, and tags. |
 | `/api/eval/run` | `POST` | Executes the evaluation benchmark suite across all 10 test cases and returns composite metrics. |
 | `/api/eval/runs` | `GET` | Returns historical evaluation benchmark runs and pass rate trends. |
+| `/api/training/datasets` | `GET` | Returns all generated training datasets, sample counts, and split statistics. |
+| `/api/training/generate` | `POST` | Triggers automated dataset synthesis from real doc chunks with format and split configuration. |
+| `/api/training/export` | `GET` | Downloads dataset files in `.jsonl` or `.json` format for Alpaca, ChatML, DPO, or Triplets. |
 
 ---
 

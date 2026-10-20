@@ -343,3 +343,59 @@ model EvalResult {
   @@map("eval_results")
 }
 
+// -------------------------------------------------------------
+// Training Data Engine Models (Real Doc Chunk Instruction Tuning)
+// -------------------------------------------------------------
+
+model TrainingDataset {
+  id              String           @id @default(cuid())
+  name            String           @unique
+  description     String?          @db.Text
+  format          String           @default("ALPACA") // ALPACA, CHATML, DPO, RETRIEVAL_TRIPLET
+  version         String           @default("1.0.0")
+  totalSamples    Int              @default(0)
+  trainCount      Int              @default(0)
+  valCount        Int              @default(0)
+  testCount       Int              @default(0)
+  sourceRepo      String           @default("fastapi/fastapi")
+
+  samples         TrainingSample[]
+
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+
+  @@map("training_datasets")
+}
+
+model TrainingSample {
+  id               String          @id @default(cuid())
+  datasetId        String
+  dataset          TrainingDataset @relation(fields: [datasetId], references: [id], onDelete: Cascade)
+
+  split            String          @default("TRAIN") // TRAIN, VALIDATION, TEST
+  format           String          @default("ALPACA")
+
+  // Instruction tuning & Chat fields
+  instruction      String          @db.Text
+  inputContext     String?         @db.Text
+  outputResponse   String          @db.Text
+
+  // DPO preference fields (chosen vs rejected)
+  rejectedResponse String?         @db.Text
+
+  // Retrieval Triplet fields (hard negatives)
+  negativeContext  String?         @db.Text
+
+  // Provenance / source tracking
+  sourceDocPath    String?
+  sourceChunkIndex Int?
+  category         String          @default("general")
+  tags             String[]
+
+  createdAt        DateTime        @default(now())
+
+  @@index([datasetId, split])
+  @@index([category])
+  @@map("training_samples")
+}
+
