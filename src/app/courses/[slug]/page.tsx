@@ -176,23 +176,28 @@ export default async function CourseDetailPage({ params }: Props) {
               )}
             </div>
 
-            <form action="/api/enroll" method="POST">
-              <input type="hidden" name="courseId" value={course.id} />
-              <button
-                type="button"
-                className="btn btn-primary"
-                style={{ width: "100%", padding: "0.8rem", fontSize: "1rem", justifyContent: "center" }}
-                onClick={() => {
-                  fetch("/api/enroll", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ courseId: course.id, userId: "usr_student_1" }),
-                  }).then(() => alert("Successfully enrolled in " + course.title + "!"));
-                }}
-              >
-                Enroll in Course
-              </button>
-            </form>
+            <Link
+              href={`/learn/${course.slug}`}
+              className="btn btn-primary"
+              style={{ width: "100%", padding: "0.85rem", fontSize: "1rem", justifyContent: "center", textDecoration: "none" }}
+            >
+              ▶ Enter Classroom &amp; Learn
+            </Link>
+
+            <button
+              type="button"
+              className="btn btn-secondary"
+              style={{ width: "100%", padding: "0.65rem", fontSize: "0.9rem", justifyContent: "center" }}
+              onClick={() => {
+                fetch("/api/enroll", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({ courseId: course.id, userId: "usr_student_1" }),
+                }).then(() => alert("Successfully enrolled in " + course.title + "! Added to your Dashboard."));
+              }}
+            >
+              ✓ Enroll in Course
+            </button>
 
             <Link
               href="/api-docs"
@@ -258,8 +263,9 @@ export default async function CourseDetailPage({ params }: Props) {
 
                 <div style={{ display: "flex", flexDirection: "column" }}>
                   {m.lessons?.map((les: any) => (
-                    <div
+                    <Link
                       key={les.id}
+                      href={`/learn/${course.slug}?lesson=${les.id}`}
                       style={{
                         padding: "0.75rem 1.25rem",
                         display: "flex",
@@ -267,10 +273,12 @@ export default async function CourseDetailPage({ params }: Props) {
                         alignItems: "center",
                         borderBottom: "1px solid rgba(255,255,255,0.04)",
                         fontSize: "0.9rem",
+                        textDecoration: "none",
+                        color: "inherit",
                       }}
                     >
                       <div style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
-                        <span>▶</span>
+                        <span style={{ color: "var(--accent-primary)" }}>▶</span>
                         <span style={{ color: "var(--text-primary)" }}>{les.title}</span>
                         {les.isFreePreview && (
                           <span className="badge badge-success" style={{ fontSize: "0.7rem", padding: "0.1rem 0.4rem" }}>
@@ -281,7 +289,7 @@ export default async function CourseDetailPage({ params }: Props) {
                       <span style={{ color: "var(--text-secondary)", fontSize: "0.8rem" }}>
                         {les.durationMinutes} min
                       </span>
-                    </div>
+                    </Link>
                   ))}
                 </div>
               </div>

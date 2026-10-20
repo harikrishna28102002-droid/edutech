@@ -40,22 +40,30 @@ export default function Home() {
           schema modeling for courses, lessons, student progress tracking, and zero-downtime database orchestration.
         </p>
 
-        <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+        <div style={{ display: "flex", gap: "0.75rem", justifyContent: "center", flexWrap: "wrap", maxWidth: "960px", margin: "0 auto 2rem auto" }}>
           <Link href="/courses" className="btn btn-primary">
-            Explore Course Catalog
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M5 12h14" />
-              <path d="m12 5 7 7-7 7" />
-            </svg>
+            Explore Course Catalog &rarr;
+          </Link>
+          <Link href="/dashboard" className="btn btn-secondary">
+            🎓 Student Dashboard
+          </Link>
+          <Link href="/learn/production-nextjs-microservices" className="btn btn-secondary">
+            🎬 Interactive Classroom
+          </Link>
+          <Link href="/studio" className="btn btn-secondary">
+            🛠️ Faculty Studio
+          </Link>
+          <Link href="/api-docs" className="btn btn-secondary">
+            📡 API Explorer
           </Link>
           <Link href="/docs/fastapi" className="btn btn-secondary">
             ⚡ FastAPI Docs Hub
           </Link>
           <Link href="/search" className="btn btn-secondary">
-            🔍 Hybrid Search &amp; Reranker
+            🔍 Hybrid Search
           </Link>
           <Link href="/ask" className="btn btn-secondary">
-            🤖 AI Answer Assistant
+            🤖 AI Assistant
           </Link>
           <Link href="/sandbox" className="btn btn-secondary">
             🐳 Docker Sandbox
@@ -64,14 +72,8 @@ export default function Home() {
             📊 Eval Suite
           </Link>
           <Link href="/training" className="btn btn-secondary">
-            🧠 Training Data Studio
+            🧠 Training Studio
           </Link>
-          <a href="#docker-architecture" className="btn btn-secondary">
-            View Docker Stack
-          </a>
-          <a href="#quickstart" className="btn btn-secondary">
-            Quickstart Commands
-          </a>
         </div>
       </section>
 
@@ -415,7 +417,14 @@ model Enrollment {
               </p>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderTop: "1px solid var(--border-color)", paddingTop: "1rem" }}>
                 <span style={{ fontSize: "1.25rem", fontWeight: 700, color: "#fff" }}>$89.99</span>
-                <span style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>2 Modules • 4 Lessons</span>
+                <div style={{ display: "flex", gap: "0.35rem" }}>
+                  <Link href="/learn/production-nextjs-microservices" className="btn btn-primary btn-sm" style={{ fontSize: "0.75rem", padding: "0.25rem 0.6rem" }}>
+                    ▶ Classroom
+                  </Link>
+                  <Link href="/courses/production-nextjs-microservices" className="btn btn-secondary btn-sm" style={{ fontSize: "0.75rem", padding: "0.25rem 0.5rem" }}>
+                    Details
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
@@ -448,7 +457,14 @@ model Enrollment {
               </p>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderTop: "1px solid var(--border-color)", paddingTop: "1rem" }}>
                 <span style={{ fontSize: "1.25rem", fontWeight: 700, color: "#fff" }}>$99.99</span>
-                <span style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>1 Module • 2 Lessons</span>
+                <div style={{ display: "flex", gap: "0.35rem" }}>
+                  <Link href="/learn/applied-llm-engineering" className="btn btn-primary btn-sm" style={{ fontSize: "0.75rem", padding: "0.25rem 0.6rem" }}>
+                    ▶ Classroom
+                  </Link>
+                  <Link href="/courses/applied-llm-engineering" className="btn btn-secondary btn-sm" style={{ fontSize: "0.75rem", padding: "0.25rem 0.5rem" }}>
+                    Details
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
@@ -481,7 +497,11 @@ model Enrollment {
               </p>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderTop: "1px solid var(--border-color)", paddingTop: "1rem" }}>
                 <span style={{ fontSize: "1.25rem", fontWeight: 700, color: "#fff" }}>$49.99</span>
-                <span style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>1 Module • 1 Lesson</span>
+                <div style={{ display: "flex", gap: "0.35rem" }}>
+                  <Link href="/courses" className="btn btn-primary btn-sm" style={{ fontSize: "0.75rem", padding: "0.25rem 0.6rem" }}>
+                    Explore
+                  </Link>
+                </div>
               </div>
             </div>
           </div>

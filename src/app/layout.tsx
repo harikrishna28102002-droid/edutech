@@ -60,7 +60,17 @@ export default function RootLayout({
                 </li>
                 <li>
                   <Link href="/courses" className="nav-link">
-                    Courses Catalog
+                    Courses
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/dashboard" className="nav-link">
+                    Dashboard
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/learn/production-nextjs-microservices" className="nav-link">
+                    Classroom
                   </Link>
                 </li>
                 <li>
@@ -80,58 +90,64 @@ export default function RootLayout({
                 </li>
                 <li>
                   <Link href="/sandbox" className="nav-link">
-                    Docker Sandbox
+                    Sandbox
                   </Link>
                 </li>
                 <li>
                   <Link href="/eval" className="nav-link">
-                    Evals &amp; Benchmarks
+                    Evals
                   </Link>
                 </li>
                 <li>
                   <Link href="/training" className="nav-link">
-                    Training Data
+                    Training
                   </Link>
                 </li>
                 <li>
-                  <a href="#docker-architecture" className="nav-link">
-                    Docker & DB Stack
-                  </a>
-                </li>
-                <li>
-                  <a href="#schema-reference" className="nav-link">
-                    Prisma Schema
-                  </a>
+                  <Link href="/studio" className="nav-link">
+                    Studio
+                  </Link>
                 </li>
                 <li>
                   <Link href="/api-docs" className="nav-link">
                     API Explorer
                   </Link>
                 </li>
-                <li>
-                  <a
-                    href="/api/health"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="nav-link"
-                  >
-                    API Health
-                  </a>
-                </li>
               </ul>
             </nav>
 
             <div style={{ display: "flex", alignItems: "center", gap: "0.85rem" }}>
-              <span className="badge badge-success">
-                <span className="pulse-dot success" />
-                PostgreSQL &amp; Docker
-              </span>
-              <a
-                href="#quickstart"
-                className="btn btn-primary btn-sm"
+              <Link
+                href="/dashboard"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "0.45rem",
+                  textDecoration: "none",
+                  padding: "0.25rem 0.65rem",
+                  borderRadius: "var(--radius-full)",
+                  background: "rgba(255, 255, 255, 0.05)",
+                  border: "1px solid var(--border-color)",
+                }}
+                title="View Student Dashboard"
               >
-                Quickstart
-              </a>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=64&q=80"
+                  alt="Sarah Lin"
+                  style={{ width: "22px", height: "22px", borderRadius: "50%", objectFit: "cover" }}
+                />
+                <span style={{ fontSize: "0.8rem", color: "var(--text-primary)", fontWeight: 600 }}>
+                  Sarah Lin
+                </span>
+              </Link>
+              <Link
+                href="/courses"
+                className="btn btn-primary btn-sm"
+                style={{ textDecoration: "none" }}
+              >
+                Explore Courses
+              </Link>
             </div>
           </div>
         </header>
@@ -158,22 +174,23 @@ export default function RootLayout({
               </div>
 
               <div>
-                <h4 style={{ color: "#fff", marginBottom: "0.85rem", fontSize: "0.95rem" }}>Architecture</h4>
+                <h4 style={{ color: "#fff", marginBottom: "0.85rem", fontSize: "0.95rem" }}>Learning &amp; AI</h4>
                 <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "0.45rem", fontSize: "0.85rem" }}>
-                  <li><a href="#docker-architecture" style={{ color: "var(--text-secondary)", textDecoration: "none" }}>Docker Compose Services</a></li>
-                  <li><a href="#schema-reference" style={{ color: "var(--text-secondary)", textDecoration: "none" }}>Prisma Relational Models</a></li>
-                  <li><a href="/api/health" style={{ color: "var(--text-secondary)", textDecoration: "none" }}>Health &amp; Uptime Check</a></li>
-                  <li><a href="/api/courses" style={{ color: "var(--text-secondary)", textDecoration: "none" }}>Courses JSON REST API</a></li>
+                  <li><Link href="/courses" style={{ color: "var(--text-secondary)", textDecoration: "none" }}>Courses Catalog</Link></li>
+                  <li><Link href="/dashboard" style={{ color: "var(--text-secondary)", textDecoration: "none" }}>Student Dashboard</Link></li>
+                  <li><Link href="/learn/production-nextjs-microservices" style={{ color: "var(--text-secondary)", textDecoration: "none" }}>Interactive Classroom</Link></li>
+                  <li><Link href="/ask" style={{ color: "var(--text-secondary)", textDecoration: "none" }}>AI Answer Assistant</Link></li>
+                  <li><Link href="/sandbox" style={{ color: "var(--text-secondary)", textDecoration: "none" }}>Docker Sandbox</Link></li>
                 </ul>
               </div>
 
               <div>
-                <h4 style={{ color: "#fff", marginBottom: "0.85rem", fontSize: "0.95rem" }}>Stack Details</h4>
+                <h4 style={{ color: "#fff", marginBottom: "0.85rem", fontSize: "0.95rem" }}>Faculty &amp; System</h4>
                 <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "0.45rem", fontSize: "0.85rem" }}>
-                  <li>Node.js v20+ / Next.js 16 App Router</li>
-                  <li>PostgreSQL 16 Alpine Database</li>
-                  <li>Prisma ORM 6.4 + Automated Seeding</li>
-                  <li>Standalone Multi-Stage Container</li>
+                  <li><Link href="/studio" style={{ color: "var(--text-secondary)", textDecoration: "none" }}>Course Creator Studio</Link></li>
+                  <li><Link href="/api-docs" style={{ color: "var(--text-secondary)", textDecoration: "none" }}>OpenAPI 3.1 Explorer</Link></li>
+                  <li><a href="/api/health" style={{ color: "var(--text-secondary)", textDecoration: "none" }}>Health &amp; Uptime Check</a></li>
+                  <li><a href="/api/courses" style={{ color: "var(--text-secondary)", textDecoration: "none" }}>Courses JSON REST API</a></li>
                 </ul>
               </div>
             </div>
