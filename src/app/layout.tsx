@@ -104,6 +104,11 @@ export default function RootLayout({
                   </a>
                 </li>
                 <li>
+                  <Link href="/api-docs" className="nav-link">
+                    API Explorer
+                  </Link>
+                </li>
+                <li>
                   <a
                     href="/api/health"
                     target="_blank"

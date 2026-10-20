@@ -278,15 +278,63 @@ EduTech includes an end-to-end **QLoRA (Quantized Low-Rank Adaptation)** fine-tu
 
 ---
 
-## 📡 REST API Reference
+## 📡 REST Backend API Reference
+
+EduTech features a comprehensive enterprise-grade RESTful API built on **Next.js 16 App Router** with Prisma ORM and zero-downtime resilient in-memory fallbacks.
+
+Interactive OpenAPI 3.1 Documentation and live testing console available at:
+👉 **[http://localhost:3000/api-docs](http://localhost:3000/api-docs)**  
+Raw OpenAPI JSON schema: **[http://localhost:3000/api/openapi.json](http://localhost:3000/api/openapi.json)**
+
+### 🎓 Course Management Endpoints
+
+| Endpoint | Method | Description | Request / Query Parameters |
+| :--- | :--- | :--- | :--- |
+| `/api/courses` | `GET` | List published courses with computed statistics (duration, modules, lessons count, average rating). | `?category=slug`, `?level=BEGINNER`, `?q=search`, `?instructorId=id` |
+| `/api/courses` | `POST` | Create a new course with auto-slugification and category link. | Body: `{ title, subtitle?, description, level?, price?, categoryId, instructorId? }` |
+| `/api/courses/[id]` | `GET` | Retrieve complete course details by ID or slug including modules, lessons, and reviews. | Route param: `id` (e.g. `crs_nextjs_microservices`) |
+| `/api/courses/[id]` | `PUT` | Update course title, subtitle, description, price, or published status. | Route param: `id`, Body: partial course fields |
+| `/api/courses/[id]` | `DELETE` | Remove a course and its associated curriculum from the catalog. | Route param: `id` |
+
+### 📖 Curriculum & Lessons Endpoints
+
+| Endpoint | Method | Description | Request / Query Parameters |
+| :--- | :--- | :--- | :--- |
+| `/api/courses/[id]/modules` | `POST` | Add a new curriculum module to a course. | Route param: `id`, Body: `{ title, orderIndex? }` |
+| `/api/modules/[id]/lessons` | `POST` | Append a lesson to a module with Markdown content and preview flag. | Route param: `id`, Body: `{ title, description?, videoUrl?, content, durationMinutes?, isFreePreview? }` |
+| `/api/lessons/[id]` | `GET` | Retrieve single lesson details with parent module context and prev/next lesson navigation. | Route param: `id` (or slug) |
+| `/api/lessons/[id]` | `PUT` | Update lesson content, duration, or preview settings. | Route param: `id`, Body: partial lesson fields |
+| `/api/lessons/[id]` | `DELETE` | Remove a lesson from the module. | Route param: `id` |
+
+### 📈 Student Enrollment & Automatic Progress Recalculation
+
+| Endpoint | Method | Description | Request / Query Parameters |
+| :--- | :--- | :--- | :--- |
+| `/api/enroll` | `GET` | Retrieve all courses the current user is enrolled in with progress percentage. | `?userId=usr_student_1` |
+| `/api/enroll` | `POST` | Enroll a user into a course. | Body: `{ courseId, userId? }` |
+| `/api/progress` | `GET` | Retrieve lesson progress records for a student, optionally filtered by course. | `?userId=usr_student_1`, `?courseId=crs_id` |
+| `/api/progress` | `POST` | Record lesson completion or playback position. **Automatically recalculates course progress % and marks completed if 100%.** | Body: `{ lessonId, userId?, isCompleted?, lastPositionSeconds? }` |
+
+### ⭐ Reviews, Taxonomy & Users
+
+| Endpoint | Method | Description | Request / Query Parameters |
+| :--- | :--- | :--- | :--- |
+| `/api/courses/[id]/reviews` | `GET` | Retrieve all student reviews and star ratings for a course. | Route param: `id` |
+| `/api/courses/[id]/reviews` | `POST` | Submit a 1–5 star rating and testimonial for a course. | Route param: `id`, Body: `{ rating, comment?, userId? }` |
+| `/api/categories` | `GET` | List all course categories with active course counts. | None |
+| `/api/categories` | `POST` | Create a new subject category with slug and icon. | Body: `{ name, description?, icon? }` |
+| `/api/users` | `GET` | User directory with optional role filtering. | `?role=STUDENT` / `INSTRUCTOR` / `ADMIN` |
+| `/api/users/[id]` | `GET` | Fetch detailed user profile with created courses and active enrollments. | Route param: `id` |
+| `/api/auth/session` | `GET` / `POST` | Inspect or simulate switching auth sessions (`STUDENT`, `INSTRUCTOR`, `ADMIN`). | `?role=STUDENT` or Body: `{ role }` |
+
+### 🤖 AI, Search, Sandbox & Platform Endpoints
 
 | Endpoint | Method | Description |
 | :--- | :--- | :--- |
+| `/api/openapi.json` | `GET` | Returns full OpenAPI 3.1.0 specification schema in JSON format. |
 | `/api/health` | `GET` | Healthcheck reporting PostgreSQL connection status, latency, uptime, and database counts. |
-| `/api/courses` | `GET` | Fetches published courses with modules, lessons, instructor details, and ratings. Supports `?category=slug`, `?level=BEGINNER`, `?q=search`. |
 | `/api/stats` | `GET` | Returns platform aggregates (total courses, students, instructors, lessons, enrollments). |
-| `/api/sync/fastapi` | `GET` | Checks FastAPI sync status, tracked commit SHA, and recent sync audit logs. |
-| `/api/sync/fastapi` | `POST` | Triggers GitHub ingestion and updates the local PostgreSQL database and LMS course. Supports `{ "force": true }`. |
+| `/api/sync/fastapi` | `GET` / `POST` | Checks status or triggers FastAPI docs synchronization from GitHub. |
 | `/api/docs/fastapi` | `GET` | Returns list of ingested FastAPI docs grouped by category with search filter (`?q=term`). |
 | `/api/docs/fastapi/[slug]` | `GET` | Fetches full markdown content of a specific documentation page with prev/next navigation. |
 | `/api/search` | `GET` / `POST` | Executes Hybrid Search (RRF) with contextual reranking. Supports `query`, `mode` (`hybrid`, `vector`, `keyword`), `limit`, and `rerank`. |

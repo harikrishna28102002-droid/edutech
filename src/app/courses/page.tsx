@@ -1,5 +1,5 @@
 import Link from "next/link";
-import prisma from "@/lib/prisma";
+import { getAllCourses } from "@/lib/lms-service";
 
 export const dynamic = "force-dynamic";
 
@@ -21,46 +21,24 @@ interface CourseCardData {
 
 async function getCourses(): Promise<CourseCardData[]> {
   try {
-    const courses = await prisma.course.findMany({
-      where: { isPublished: true },
-      include: {
-        category: true,
-        instructor: { select: { name: true, avatarUrl: true } },
-        modules: {
-          include: {
-            lessons: { select: { id: true } },
-          },
-        },
-        reviews: { select: { rating: true } },
-      },
-      orderBy: { createdAt: "desc" },
-    });
-
-    return courses.map((c) => {
-      const lessonsCount = c.modules.reduce((acc, m) => acc + m.lessons.length, 0);
-      const avgRating =
-        c.reviews.length > 0
-          ? c.reviews.reduce((acc, r) => acc + r.rating, 0) / c.reviews.length
-          : 5.0;
-
-      return {
-        id: c.id,
-        title: c.title,
-        slug: c.slug,
-        subtitle: c.subtitle,
-        description: c.description,
-        level: c.level,
-        price: Number(c.price),
-        thumbnailUrl: c.thumbnailUrl,
-        category: c.category ? { name: c.category.name, slug: c.category.slug } : null,
-        instructor: c.instructor,
-        modulesCount: c.modules.length,
-        lessonsCount,
-        averageRating: Number(avgRating.toFixed(1)),
-      };
-    });
+    const list = await getAllCourses();
+    return list.map((c) => ({
+      id: c.id,
+      title: c.title,
+      slug: c.slug,
+      subtitle: c.subtitle || null,
+      description: c.description,
+      level: c.level,
+      price: c.price,
+      thumbnailUrl: c.thumbnailUrl || null,
+      category: c.category ? { name: c.category.name, slug: c.category.slug } : null,
+      instructor: c.instructor,
+      modulesCount: c.modulesCount,
+      lessonsCount: c.lessonsCount,
+      averageRating: c.averageRating,
+    }));
   } catch (e) {
-    console.error("Database query failed:", e);
+    console.error("Failed to load courses:", e);
     return [];
   }
 }
