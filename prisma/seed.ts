@@ -106,7 +106,7 @@ async function main() {
                   title: "Architectural Overview & Containerized Workflows",
                   slug: "architectural-overview",
                   content: "Deep dive into multi-tier web application architecture, stateless containers, and persistent storage layers.",
-                  videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+                  videoUrl: "https://www.youtube.com/watch?v=wm5gMKuwSYk",
                   durationMinutes: 18,
                   orderIndex: 1,
                   isFreePreview: true,
