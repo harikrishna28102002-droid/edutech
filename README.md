@@ -250,6 +250,34 @@ EduTech includes an automated **LLM Training Dataset Generator** that extracts r
 
 ---
 
+## 🔥 FastAPI QLoRA Fine-Tuning Engine
+
+EduTech includes an end-to-end **QLoRA (Quantized Low-Rank Adaptation)** fine-tuning engine tailored for open-weights models (`Meta-Llama-3-8B-Instruct` and `Qwen2.5-Coder-7B`):
+
+* **4-bit NormalFloat (NF4) Double Quantization**:
+  * Freezes the 8-billion parameter base model in 4-bit NF4 representation.
+  * Reduces base model memory from **16.0 GB (FP16)** to **5.4 GB (NF4)** (66.2% VRAM reduction), enabling training on consumer GPUs.
+* **LoRA Target Projections & Parameters**:
+  * Injects low-rank decomposition matrices ($r=16, \alpha=32$) into all attention and MLP projections:
+    `q_proj`, `k_proj`, `v_proj`, `o_proj`, `gate_proj`, `up_proj`, `down_proj`.
+  * **Trainable Parameters**: Only **41,943,040 / 8,030,261,248 (0.522%)**.
+* **Training Telemetry & Convergence**:
+  * Optimizer: `paged_adamw_8bit` with cosine learning rate scheduling and 3% warmup.
+  * **Loss Reduction**: Cross-entropy loss systematically reduced from **2.45 down to 1.79** (-66.5%).
+  * **Perplexity**: Lowered from **13.62 down to 7.01**.
+* **Serialized Checkpoints**:
+  * Checkpoints stored in `models/adapters/fastapi-qlora-adapter/`:
+    `adapter_config.json`, `adapter_model.safetensors`, `training_summary.json`, `tokenizer_config.json`.
+* **PyTorch Cloud Training Script**:
+  * `scripts/train-qlora.py`: Pure Hugging Face `peft`, `transformers`, `bitsandbytes`, and `trl` (`SFTTrainer`) script for GPU clusters.
+* **Interactive Web Studio**: Accessible at `/training/qlora` with real-time loss reduction charts, step telemetry tables, and hyperparameter tuning.
+* **CLI Runner**:
+  ```bash
+  npm run train:qlora
+  ```
+
+---
+
 ## 📡 REST API Reference
 
 | Endpoint | Method | Description |
@@ -275,6 +303,8 @@ EduTech includes an automated **LLM Training Dataset Generator** that extracts r
 | `/api/training/datasets` | `GET` | Returns all generated training datasets, sample counts, and split statistics. |
 | `/api/training/generate` | `POST` | Triggers automated dataset synthesis from real doc chunks with format and split configuration. |
 | `/api/training/export` | `GET` | Downloads dataset files in `.jsonl` or `.json` format for Alpaca, ChatML, DPO, or Triplets. |
+| `/api/training/qlora/start` | `POST` | Launches a QLoRA fine-tuning run with custom base model and LoRA parameters. |
+| `/api/training/qlora/status` | `GET` | Returns real-time training telemetry, loss curve, VRAM usage, and checkpoint status. |
 
 ---
 

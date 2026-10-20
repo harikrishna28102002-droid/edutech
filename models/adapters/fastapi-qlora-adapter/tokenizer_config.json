@@ -1,0 +1,10 @@
+{
+  "add_bos_token": true,
+  "add_eos_token": false,
+  "bos_token": "<|begin_of_text|>",
+  "chat_template": "{{ bos_token }}{% for message in messages %}{{ '<|start_header_id|>' + message['role'] + '<|end_header_id|>\n\n' + message['content'] | trim + '<|eot_id|>' }}{% endfor %}{% if add_generation_prompt %}{{ '<|start_header_id|>assistant<|end_header_id|>\n\n' }}{% endif %}",
+  "clean_up_tokenization_spaces": true,
+  "eos_token": "<|eot_id|>",
+  "model_max_length": 8192,
+  "tokenizer_class": "PreTrainedTokenizerFast"
+}

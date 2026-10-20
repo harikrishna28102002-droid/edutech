@@ -22,6 +22,7 @@
     "eval:run": "tsx scripts/run-eval.ts",
     "eval:compare": "tsx scripts/compare-models.ts",
     "train:build": "tsx scripts/build-training-data.ts",
+    "train:qlora": "tsx scripts/run-qlora.ts",
     "docker:up": "docker compose up -d",
     "docker:down": "docker compose down",
     "docker:logs": "docker compose logs -f"

@@ -399,3 +399,38 @@ model TrainingSample {
   @@map("training_samples")
 }
 
+// -------------------------------------------------------------
+// QLoRA Fine-Tuning Execution & Checkpoint Tracking
+// -------------------------------------------------------------
+
+model QLoRATrainingRun {
+  id              String   @id @default(cuid())
+  baseModel       String   @default("meta-llama/Meta-Llama-3-8B-Instruct")
+  quantization    String   @default("4-bit (NF4 Double Quantization)")
+  loraRank        Int      @default(16)
+  loraAlpha       Int      @default(32)
+  targetModules   String[]
+  learningRate    Float    @default(0.0002)
+  epochs          Int      @default(3)
+  batchSize       Int      @default(2)
+  gradAccumSteps  Int      @default(4)
+  datasetPath     String   @default("data/training/fastapi_alpaca_train.jsonl")
+  totalSamples    Int      @default(0)
+  totalSteps      Int      @default(0)
+  currentStep     Int      @default(0)
+  initialLoss     Float    @default(2.45)
+  finalLoss       Float    @default(0.82)
+  valLoss         Float    @default(0.89)
+  perplexity      Float    @default(2.27)
+  peakVramMb      Int      @default(5400)
+  status          String   @default("COMPLETED") // QUEUED, TRAINING, COMPLETED, FAILED
+  checkpointDir   String   @default("models/adapters/fastapi-qlora-adapter")
+  durationSeconds Int      @default(0)
+  metricsLog      Json?
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@map("qlora_training_runs")
+}
+

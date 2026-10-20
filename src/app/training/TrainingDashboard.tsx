@@ -120,20 +120,27 @@ export default function TrainingDashboard({
     <div style={{ maxWidth: "1380px", margin: "0 auto", padding: "2rem 1.5rem" }}>
       {/* Page Header */}
       <div style={{ marginBottom: "2rem" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "0.5rem" }}>
-          <span className="badge badge-purple" style={{ fontSize: "0.8rem", padding: "0.3rem 0.75rem" }}>
-            🧠 LLM Fine-Tuning Pipeline
-          </span>
-          <span className="badge badge-cyan" style={{ fontSize: "0.8rem", padding: "0.3rem 0.75rem" }}>
-            Real FastAPI Chunks
-          </span>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: "1rem" }}>
+          <div>
+            <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "0.5rem" }}>
+              <span className="badge badge-purple" style={{ fontSize: "0.8rem", padding: "0.3rem 0.75rem" }}>
+                🧠 LLM Fine-Tuning Pipeline
+              </span>
+              <span className="badge badge-cyan" style={{ fontSize: "0.8rem", padding: "0.3rem 0.75rem" }}>
+                Real FastAPI Chunks
+              </span>
+            </div>
+            <h1 style={{ fontSize: "2.4rem", fontWeight: 800, letterSpacing: "-0.03em", color: "#fff", marginBottom: "0.5rem" }}>
+              Training Data Studio
+            </h1>
+            <p style={{ color: "var(--text-secondary)", fontSize: "1.05rem", maxWidth: "840px" }}>
+              Extracts real technical chunks from official FastAPI documentation to synthesize high-quality instruction-tuning pairs (Alpaca), conversational dialogues (ChatML), preference pairs (DPO), and dense retrieval triplets.
+            </p>
+          </div>
+          <Link href="/training/qlora" className="btn btn-primary" style={{ display: "flex", alignItems: "center", gap: "0.5rem", fontSize: "0.95rem", padding: "0.65rem 1.25rem" }}>
+            🔥 Run QLoRA Fine-Tune &rarr;
+          </Link>
         </div>
-        <h1 style={{ fontSize: "2.4rem", fontWeight: 800, letterSpacing: "-0.03em", color: "#fff", marginBottom: "0.5rem" }}>
-          Training Data Studio
-        </h1>
-        <p style={{ color: "var(--text-secondary)", fontSize: "1.05rem", maxWidth: "840px" }}>
-          Extracts real technical chunks from official FastAPI documentation to synthesize high-quality instruction-tuning pairs (Alpaca), conversational dialogues (ChatML), preference pairs (DPO), and dense retrieval triplets.
-        </p>
       </div>
 
       {/* Aggregate Stats Cards */}
