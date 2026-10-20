@@ -109,6 +109,11 @@ export default function RootLayout({
                   </Link>
                 </li>
                 <li>
+                  <Link href="/metrics" className="nav-link">
+                    Metrics
+                  </Link>
+                </li>
+                <li>
                   <Link href="/api-docs" className="nav-link">
                     API Explorer
                   </Link>
@@ -188,6 +193,7 @@ export default function RootLayout({
                 <h4 style={{ color: "#fff", marginBottom: "0.85rem", fontSize: "0.95rem" }}>Faculty &amp; System</h4>
                 <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "0.45rem", fontSize: "0.85rem" }}>
                   <li><Link href="/studio" style={{ color: "var(--text-secondary)", textDecoration: "none" }}>Course Creator Studio</Link></li>
+                  <li><Link href="/metrics" style={{ color: "var(--text-secondary)", textDecoration: "none" }}>Metrics &amp; Telemetry</Link></li>
                   <li><Link href="/api-docs" style={{ color: "var(--text-secondary)", textDecoration: "none" }}>OpenAPI 3.1 Explorer</Link></li>
                   <li><a href="/api/health" style={{ color: "var(--text-secondary)", textDecoration: "none" }}>Health &amp; Uptime Check</a></li>
                   <li><a href="/api/courses" style={{ color: "var(--text-secondary)", textDecoration: "none" }}>Courses JSON REST API</a></li>

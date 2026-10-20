@@ -299,6 +299,7 @@ EduTech features a modern, responsive, high-aesthetic frontend engineered with *
 | **`/sandbox`** | [Docker Code Sandbox](file:///c:/Users/happy/OneDrive/Desktop/Edutech/src/app/sandbox/page.tsx) | Interactive Python code runner executing inside isolated Alpine Linux containers. |
 | **`/eval`** | [Model Evaluation Benchmark](file:///c:/Users/happy/OneDrive/Desktop/Edutech/src/app/eval/page.tsx) | Real GitHub discussions evaluation suite with automated scoring and head-to-head comparisons. |
 | **`/training`** | [Training Data & QLoRA Studio](file:///c:/Users/happy/OneDrive/Desktop/Edutech/src/app/training/page.tsx) | Dataset synthesis, Alpaca/ChatML export, and real-time QLoRA fine-tuning loss charts. |
+| **`/metrics`** | [Metrics & Telemetry Operations](file:///c:/Users/happy/OneDrive/Desktop/Edutech/src/app/metrics/MetricsDashboard.tsx) | Real-time operations console monitoring evaluation pass rates, daily sync audit logs, and system health. |
 
 ---
 
@@ -358,6 +359,8 @@ Raw OpenAPI JSON schema: **[http://localhost:3000/api/openapi.json](http://local
 | `/api/openapi.json` | `GET` | Returns full OpenAPI 3.1.0 specification schema in JSON format. |
 | `/api/health` | `GET` | Healthcheck reporting PostgreSQL connection status, latency, uptime, and database counts. |
 | `/api/stats` | `GET` | Returns platform aggregates (total courses, students, instructors, lessons, enrollments). |
+| `/api/metrics` | `GET` | Consolidates System Telemetry (Uptime, Memory, DB Latency), Evaluation benchmarks, Sync Freshness, and LMS KPIs. |
+| `/api/sync/daily` | `GET` / `POST` | Inspects automated daily sync schedule and freshness status, or triggers sync with embedding re-indexing. |
 | `/api/sync/fastapi` | `GET` / `POST` | Checks status or triggers FastAPI docs synchronization from GitHub. |
 | `/api/docs/fastapi` | `GET` | Returns list of ingested FastAPI docs grouped by category with search filter (`?q=term`). |
 | `/api/docs/fastapi/[slug]` | `GET` | Fetches full markdown content of a specific documentation page with prev/next navigation. |
