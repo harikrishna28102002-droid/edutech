@@ -278,6 +278,30 @@ EduTech includes an end-to-end **QLoRA (Quantized Low-Rank Adaptation)** fine-tu
 
 ---
 
+## 🖥️ Modern Web Frontend Architecture
+
+EduTech features a modern, responsive, high-aesthetic frontend engineered with **Vanilla CSS tokens**, glassmorphism, dynamic micro-animations, and pure Next.js 16 App Router components.
+
+### 🌐 Key Frontend Applications & Routes
+
+| Route | Page Component | Feature Highlights |
+| :--- | :--- | :--- |
+| **`/`** | [Overview & Stack Architecture](file:///c:/Users/happy/OneDrive/Desktop/Edutech/src/app/page.tsx) | Live telemetry database status monitor, Docker service breakdown, and feature showcase. |
+| **`/courses`** | [Courses Catalog & Explorer](file:///c:/Users/happy/OneDrive/Desktop/Edutech/src/app/courses/CoursesExplorer.tsx) | Dynamic category filtering, search input, difficulty & price filters, sorting, and direct enrollment. |
+| **`/courses/[slug]`** | [Course Details & Syllabus](file:///c:/Users/happy/OneDrive/Desktop/Edutech/src/app/courses/%5Bslug%5D/page.tsx) | Complete syllabus with modules breakdown, preview lessons, instructor credentials, and student reviews. |
+| **`/learn/[slug]`** | [Interactive Classroom & Player](file:///c:/Users/happy/OneDrive/Desktop/Edutech/src/app/learn/%5Bslug%5D/LearningPlayer.tsx) | Distraction-free learning player with video stream viewport, sidebar curriculum tree, progress checkboxes that sync to PostgreSQL, integrated Docker code sandbox, and course completion celebration. |
+| **`/dashboard`** | [Student Learning Dashboard](file:///c:/Users/happy/OneDrive/Desktop/Edutech/src/app/dashboard/DashboardClient.tsx) | Active enrolled courses, study streak counter (7 Days 🔥), learning hours, quick lesson resume card, and completion certificates. |
+| **`/studio`** | [Course Creator & Faculty Studio](file:///c:/Users/happy/OneDrive/Desktop/Edutech/src/app/studio/StudioClient.tsx) | Visual course builder, markdown lesson authoring, category selection, publishing workflows, and catalog management. |
+| **`/api-docs`** | [OpenAPI 3.1 Explorer Console](file:///c:/Users/happy/OneDrive/Desktop/Edutech/src/app/api-docs/ApiDocsExplorer.tsx) | Live testing console with parameter inputs, JSON request editor, real fetch execution, response duration, and cURL commands. |
+| **`/docs/fastapi`** | [FastAPI Docs Hub](file:///c:/Users/happy/OneDrive/Desktop/Edutech/src/app/docs/fastapi/page.tsx) | Synced documentation reader with category grouping, live search, and GitHub sync triggers. |
+| **`/search`** | [Hybrid Search & Reranking](file:///c:/Users/happy/OneDrive/Desktop/Edutech/src/app/search/page.tsx) | Interactive retrieval engine comparing BM25 keyword, dense vector embeddings, and RRF fusion. |
+| **`/ask`** | [AI Assistant](file:///c:/Users/happy/OneDrive/Desktop/Edutech/src/app/ask/page.tsx) | Streaming RAG pipeline with Ollama LLM inference, citation links, and source inspector. |
+| **`/sandbox`** | [Docker Code Sandbox](file:///c:/Users/happy/OneDrive/Desktop/Edutech/src/app/sandbox/page.tsx) | Interactive Python code runner executing inside isolated Alpine Linux containers. |
+| **`/eval`** | [Model Evaluation Benchmark](file:///c:/Users/happy/OneDrive/Desktop/Edutech/src/app/eval/page.tsx) | Real GitHub discussions evaluation suite with automated scoring and head-to-head comparisons. |
+| **`/training`** | [Training Data & QLoRA Studio](file:///c:/Users/happy/OneDrive/Desktop/Edutech/src/app/training/page.tsx) | Dataset synthesis, Alpaca/ChatML export, and real-time QLoRA fine-tuning loss charts. |
+
+---
+
 ## 📡 REST Backend API Reference
 
 EduTech features a comprehensive enterprise-grade RESTful API built on **Next.js 16 App Router** with Prisma ORM and zero-downtime resilient in-memory fallbacks.
