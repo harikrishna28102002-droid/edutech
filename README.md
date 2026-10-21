@@ -1,6 +1,10 @@
 # 🎓 EduTech — Cloud LMS Platform Skeleton
 
-An enterprise-ready, containerized Learning Management System (LMS) skeleton engineered with **Next.js 16 (App Router)**, **PostgreSQL 16**, **Prisma ORM 6.4**, and **Docker Compose** orchestration.
+[![Live Website](https://img.shields.io/badge/Live%20Demo-GitHub%20Pages-brightgreen?style=for-the-badge&logo=github)](https://harikrishna28102002-droid.github.io/edutech/)
+[![GitHub Repo](https://img.shields.io/badge/Source-GitHub-blue?style=for-the-badge&logo=github)](https://github.com/harikrishna28102002-droid/edutech)
+
+> 🌐 **Live Website (Free on GitHub Pages)**: **[https://harikrishna28102002-droid.github.io/edutech/](https://harikrishna28102002-droid.github.io/edutech/)**  
+> Access the interactive course catalog, lecture video classroom, in-browser code sandbox, and AI study assistant on mobile phones, tablets, or computers worldwide without buying a domain or needing a backend server.
 
 ---
 

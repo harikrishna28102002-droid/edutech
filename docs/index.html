@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EduTech Academy | Interactive AI & LMS Engineering Platform</title>
+  <meta name="description" content="Next-Generation Learning Platform featuring Next.js 16, PostgreSQL with pgvector, Docker Sandboxing, and Hybrid Semantic Search.">
+  <meta name="author" content="harikrishna28102002-droid">
+
+  <!-- OpenGraph Social Tags -->
+  <meta property="og:title" content="EduTech Academy | Interactive AI & LMS Platform">
+  <meta property="og:description" content="Master production cloud engineering, containerized microservices, vector search, and agentic LLMs.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1200&q=80">
+  <meta property="og:type" content="website">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220%22%20width=%22100%22%20height=%22100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div class="top-notice-bar">
+    <span><span class="pulse-indicator"></span> <strong>EduTech Live on GitHub</strong>: Explore full interactive courses, code sandboxes, and AI assistance on any device!</span>
+    <a href="https://github.com/harikrishna28102002-droid/edutech" target="_blank" rel="noopener noreferrer">View Source Repository &rarr;</a>
+  </div>
+
+  <!-- Main Site Navigation -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="#home" class="brand-logo" onclick="switchTab('home')">
+        <div class="brand-icon-box">⚡</div>
+        <span>EduTech<span class="gradient-text">.io</span></span>
+        <span class="brand-badge">Public v1.0</span>
+      </a>
+
+      <!-- Desktop Navigation Menu -->
+      <nav aria-label="Main Navigation">
+        <ul class="nav-links">
+          <li><button class="nav-item-btn active" data-tab="home">🏠 Home</button></li>
+          <li><button class="nav-item-btn" data-tab="courses">📚 Courses</button></li>
+          <li><button class="nav-item-btn" data-tab="classroom">🎓 Classroom</button></li>
+          <li><button class="nav-item-btn" data-tab="dashboard">📊 Dashboard</button></li>
+          <li><button class="nav-item-btn" data-tab="sandbox">🧪 Sandbox</button></li>
+          <li><button class="nav-item-btn" data-tab="ai">🤖 AI Tutor</button></li>
+          <li><button class="nav-item-btn" data-tab="docs">📖 Architecture</button></li>
+        </ul>
+      </nav>
+
+      <!-- Right Actions -->
+      <div class="nav-actions">
+        <a href="https://github.com/harikrishna28102002-droid/edutech" target="_blank" rel="noopener noreferrer" class="github-btn">
+          <svg height="18" width="18" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+          </svg>
+          <span>Star on GitHub</span>
+        </a>
+        <button class="mobile-toggle" id="mobileMenuBtn" aria-label="Toggle Navigation">☰</button>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer Menu -->
+    <div class="mobile-nav-drawer" id="mobileNavDrawer">
+      <button class="nav-item-btn active" data-tab="home">🏠 Home</button>
+      <button class="nav-item-btn" data-tab="courses">📚 Explore Courses</button>
+      <button class="nav-item-btn" data-tab="classroom">🎓 Interactive Classroom</button>
+      <button class="nav-item-btn" data-tab="dashboard">📊 Student Dashboard</button>
+      <button class="nav-item-btn" data-tab="sandbox">🧪 Code Sandbox</button>
+      <button class="nav-item-btn" data-tab="ai">🤖 AI Study Tutor</button>
+      <button class="nav-item-btn" data-tab="docs">📖 Architecture & Specs</button>
+      <a href="https://github.com/harikrishna28102002-droid/edutech" target="_blank" class="github-btn" style="margin-top: 0.5rem; justify-content: center;">
+        View on GitHub
+      </a>
+    </div>
+  </header>
+
+  <!-- =======================================================================
+       TAB 1: HOME
+       ======================================================================= -->
+  <section id="tab-home" class="tab-section active-section container">
+    <!-- Hero Section -->
+    <div class="hero-section">
+      <div class="hero-pill">
+        <span class="badge badge-info">Next.js 16</span>
+        <span class="badge badge-purple">PostgreSQL 16</span>
+        <span class="badge badge-success">Docker</span>
+        <span class="badge badge-warning">pgvector</span>
+      </div>
+
+      <h1 class="hero-title">
+        Enterprise EdTech Foundation &amp; <span class="gradient-text">Interactive Classroom</span>
+      </h1>
+
+      <p class="hero-description">
+        Experience hands-on educational engineering directly in your browser. Master modern cloud architecture, containerized microservices, vector search, and agentic LLMs with real-time video lectures and instant code sandboxes.
+      </p>
+
+      <div class="hero-actions">
+        <button class="btn btn-primary" onclick="switchTab('courses')">
+          Explore Course Catalog &rarr;
+        </button>
+        <button class="btn btn-secondary" onclick="switchTab('classroom')">
+          🎓 Enter Classroom
+        </button>
+        <button class="btn btn-accent" onclick="switchTab('sandbox')">
+          🧪 Live Code Sandbox
+        </button>
+      </div>
+
+      <!-- Live Platform Counters -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-num gradient-text">3</div>
+          <div class="stat-label">Enterprise Courses</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num gradient-text-alt">100%</div>
+          <div class="stat-label">In-Browser Execution</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num gradient-text">0ms</div>
+          <div class="stat-label">Setup Delay (Static Git)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num gradient-text-alt">12+</div>
+          <div class="stat-label">Lecture Modules &amp; Demos</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Featured Platform Features -->
+    <div class="section-header">
+      <div>
+        <h2 class="section-title">Core Engineering Capabilities</h2>
+        <p class="section-subtitle">Everything included in the open-source repository architecture</p>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 4rem;">
+      <div class="stat-card" style="text-align: left; padding: 1.75rem;">
+        <div style="font-size: 2rem; margin-bottom: 0.75rem;">🎓</div>
+        <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-primary);">Interactive Classroom</h3>
+        <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.55; margin-bottom: 1rem;">
+          HD video streaming with curriculum navigation, markdown lecture notes, real-time code snippet viewers, and discussion boards.
+        </p>
+        <button class="btn btn-secondary btn-sm" onclick="switchTab('classroom')">Open Classroom &rarr;</button>
+      </div>
+
+      <div class="stat-card" style="text-align: left; padding: 1.75rem;">
+        <div style="font-size: 2rem; margin-bottom: 0.75rem;">🧪</div>
+        <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-primary);">In-Browser Code Sandbox</h3>
+        <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.55; margin-bottom: 1rem;">
+          Run JavaScript and algorithmic code in real-time right inside your browser with syntax highlighting and instant console diagnostics.
+        </p>
+        <button class="btn btn-secondary btn-sm" onclick="switchTab('sandbox')">Launch Sandbox &rarr;</button>
+      </div>
+
+      <div class="stat-card" style="text-align: left; padding: 1.75rem;">
+        <div style="font-size: 2rem; margin-bottom: 0.75rem;">🤖</div>
+        <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-primary);">AI Study Assistant</h3>
+        <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.55; margin-bottom: 1rem;">
+          Get instant clarification on Next.js 16, PostgreSQL connection pooling, RAG hybrid search algorithms, and Docker Compose networking.
+        </p>
+        <button class="btn btn-secondary btn-sm" onclick="switchTab('ai')">Ask AI Assistant &rarr;</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- =======================================================================
+       TAB 2: COURSES CATALOG
+       ======================================================================= -->
+  <section id="tab-courses" class="tab-section container" style="padding-top: 2rem;">
+    <div class="section-header">
+      <div>
+        <h2 class="section-title">Course Curriculum Catalog</h2>
+        <p class="section-subtitle">Deep architectural engineering courses designed for modern developers</p>
+      </div>
+    </div>
+
+    <!-- Filter & Search Bar -->
+    <div class="filter-bar">
+      <input type="text" id="courseSearchInput" placeholder="🔍 Search courses by keyword, technology, or topic..." class="search-input" />
+      <button class="filter-pill active" data-filter="all">All Categories</button>
+      <button class="filter-pill" data-filter="web-development">Full-Stack Web</button>
+      <button class="filter-pill" data-filter="ai-machine-learning">AI &amp; LLMs</button>
+      <button class="filter-pill" data-filter="cloud-devops">Cloud &amp; DevOps</button>
+    </div>
+
+    <!-- Dynamic Course Cards Container -->
+    <div class="courses-grid" id="coursesGridContainer">
+      <!-- Injected dynamically by app.js -->
+    </div>
+  </section>
+
+  <!-- =======================================================================
+       TAB 3: INTERACTIVE CLASSROOM
+       ======================================================================= -->
+  <section id="tab-classroom" class="tab-section container" style="padding-top: 2rem;">
+    <div class="section-header">
+      <div>
+        <span class="badge badge-info" style="margin-bottom: 0.5rem;">Interactive Video Classroom</span>
+        <h2 class="section-title" id="classroomCourseTitle">Production Next.js 16 &amp; Microservices</h2>
+      </div>
+      <div>
+        <button id="markCompleteBtn" class="btn btn-primary btn-sm" onclick="toggleLessonComplete()">
+          Mark as Complete
+        </button>
+      </div>
+    </div>
+
+    <div class="classroom-layout">
+      <!-- Left: Player & Content -->
+      <div class="video-container-card">
+        <div class="video-frame-box">
+          <iframe 
+            id="classroomVideoIframe"
+            src="https://www.youtube-nocookie.com/embed/wm5gMKuwSYk?rel=0" 
+            title="Lecture Video Player" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+          </iframe>
+        </div>
+
+        <div class="video-info-box">
+          <div class="video-title-row">
+            <h3 class="current-lesson-title" id="currentLessonTitle">Next.js 16 App Router Paradigm Shift</h3>
+          </div>
+
+          <!-- Tabs -->
+          <div class="lesson-tabs-nav">
+            <button class="lesson-tab-btn active" data-lesson-tab="notes">📝 Notes &amp; Overview</button>
+            <button class="lesson-tab-btn" data-lesson-tab="code">💻 Code Snippet</button>
+            <button class="lesson-tab-btn" data-lesson-tab="discussion">💬 Discussion</button>
+          </div>
+
+          <!-- Tab Content -->
+          <div id="lessonTabContentContainer" class="lesson-tab-content">
+            <!-- Injected by app.js -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Course Curriculum Playlist -->
+      <div class="playlist-sidebar-card">
+        <div class="playlist-header">
+          <span>Curriculum Outline</span>
+          <span style="font-size: 0.8rem; color: var(--accent-cyan);">Video Lessons</span>
+        </div>
+        <div class="playlist-items" id="playlistContainer">
+          <!-- Injected by app.js -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =======================================================================
+       TAB 4: STUDENT DASHBOARD
+       ======================================================================= -->
+  <section id="tab-dashboard" class="tab-section container" style="padding-top: 2rem;">
+    <div class="section-header">
+      <div>
+        <h2 class="section-title">Student Learning Dashboard</h2>
+        <p class="section-subtitle">Track your course completions, milestones, and active streak</p>
+      </div>
+    </div>
+
+    <!-- User Profile Header Card -->
+    <div class="stat-card" style="display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; text-align: left; margin-bottom: 2rem; flex-wrap: wrap;">
+      <div style="display: flex; align-items: center; gap: 1.25rem;">
+        <img 
+          src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=256&q=80" 
+          alt="Student Avatar" 
+          style="width: 64px; height: 64px; border-radius: 50%; border: 2px solid var(--accent-cyan); object-fit: cover;" 
+        />
+        <div>
+          <h3 style="font-size: 1.3rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.2rem;">Sarah Lin</h3>
+          <p style="font-size: 0.88rem; color: var(--text-secondary);">Student ID: <code style="color: var(--accent-cyan); font-family: var(--font-mono);">usr_student_1</code> • Enrolled: October 2026</p>
+        </div>
+      </div>
+      <div style="display: flex; gap: 1rem;">
+        <button class="btn btn-secondary btn-sm" onclick="switchTab('courses')">+ Enroll in Course</button>
+        <button class="btn btn-primary btn-sm" onclick="switchTab('classroom')">Resume Learning &rarr;</button>
+      </div>
+    </div>
+
+    <!-- Dashboard Stat Metrics -->
+    <div class="stats-grid" style="margin-bottom: 2.5rem;">
+      <div class="stat-card">
+        <div class="stat-num gradient-text" id="dashCompletionPercent">50%</div>
+        <div class="stat-label">Overall Completion</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num gradient-text-alt" id="dashDoneLessons">2 / 4</div>
+        <div class="stat-label">Lessons Completed</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" style="color: var(--accent-amber);">🔥 7 Days</div>
+        <div class="stat-label">Learning Streak</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" style="color: var(--accent-purple);">1 Certificate</div>
+        <div class="stat-label">Mastery Milestone</div>
+      </div>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="stat-card" style="text-align: left; padding: 1.75rem; margin-bottom: 2rem;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+        <span style="font-weight: 700; font-size: 0.95rem;">Curriculum Milestone Progress</span>
+        <span style="font-size: 0.85rem; color: var(--accent-cyan); font-weight: 600;">Active Track</span>
+      </div>
+      <div style="width: 100%; height: 10px; background: rgba(255, 255, 255, 0.08); border-radius: var(--radius-full); overflow: hidden;">
+        <div id="dashProgressBar" style="height: 100%; width: 50%; background: linear-gradient(90deg, var(--accent-cyan), var(--accent-indigo)); transition: width 0.4s ease;"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =======================================================================
+       TAB 5: CODE SANDBOX
+       ======================================================================= -->
+  <section id="tab-sandbox" class="tab-section container" style="padding-top: 2rem;">
+    <div class="section-header">
+      <div>
+        <h2 class="section-title">Interactive In-Browser Code Sandbox</h2>
+        <p class="section-subtitle">Execute and evaluate algorithmic scripts directly inside your browser</p>
+      </div>
+      <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+        <button class="btn btn-secondary btn-sm" onclick="setSandboxTemplate('cosine')">Cosine Similarity</button>
+        <button class="btn btn-secondary btn-sm" onclick="setSandboxTemplate('prisma')">PostgreSQL Pool</button>
+        <button class="btn btn-secondary btn-sm" onclick="setSandboxTemplate('rrf')">Hybrid RRF Scorer</button>
+      </div>
+    </div>
+
+    <div class="sandbox-grid">
+      <!-- Code Editor Pane -->
+      <div class="editor-pane">
+        <div class="pane-header">
+          <span class="pane-title">📝 JavaScript Code Editor</span>
+          <div style="display: flex; gap: 0.5rem;">
+            <button class="btn btn-primary btn-sm" onclick="runSandboxCode()">▶ Run Code</button>
+          </div>
+        </div>
+        <textarea id="sandboxCodeArea" class="sandbox-textarea" spellcheck="false"></textarea>
+      </div>
+
+      <!-- Execution Console Pane -->
+      <div class="console-pane">
+        <div class="pane-header">
+          <span class="pane-title">📟 Execution Console (Stdout)</span>
+          <button class="btn btn-secondary btn-sm" onclick="clearSandboxConsole()">Clear</button>
+        </div>
+        <div id="sandboxConsoleOutput" class="console-box">Click 'Run Code' to execute the script in your browser.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =======================================================================
+       TAB 6: AI TUTOR
+       ======================================================================= -->
+  <section id="tab-ai" class="tab-section container" style="padding-top: 2rem;">
+    <div class="section-header" style="text-align: center; justify-content: center; margin-bottom: 1.5rem;">
+      <div>
+        <h2 class="section-title">AI Study Assistant &amp; Architect</h2>
+        <p class="section-subtitle">Ask questions about Next.js 16, PostgreSQL pgvector, Docker containers, or RAG</p>
+      </div>
+    </div>
+
+    <div class="ai-chat-box">
+      <!-- Message Stream -->
+      <div class="chat-messages" id="aiChatMessages">
+        <div class="chat-msg bot">
+          <div class="chat-avatar bot">🤖</div>
+          <div class="chat-bubble">
+            Hello! I am your <strong>EduTech AI Study Tutor</strong>. Ask me anything about modern Next.js 16 App Router architecture, Prisma singletons, Docker sandbox security, or dense vector embeddings in pgvector.
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick prompts -->
+      <div class="quick-prompts">
+        <span style="font-size: 0.75rem; color: var(--text-muted); align-self: center;">Suggested:</span>
+        <button class="quick-pill" onclick="askQuickPrompt('Explain Next.js 16 Server Actions')">Next.js Server Actions</button>
+        <button class="quick-pill" onclick="askQuickPrompt('How does PostgreSQL pgvector work?')">PostgreSQL pgvector</button>
+        <button class="quick-pill" onclick="askQuickPrompt('What is Reciprocal Rank Fusion (RRF)?')">RAG &amp; RRF Hybrid Search</button>
+        <button class="quick-pill" onclick="askQuickPrompt('How does Docker sandbox isolate code?')">Docker Sandbox Isolation</button>
+      </div>
+
+      <!-- Input Bar -->
+      <div class="chat-input-bar">
+        <input type="text" id="aiChatInput" placeholder="Type your engineering question..." class="chat-input" />
+        <button class="btn btn-primary" onclick="sendAiMessage()">Send &rarr;</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- =======================================================================
+       TAB 7: ARCHITECTURE & DOCS
+       ======================================================================= -->
+  <section id="tab-docs" class="tab-section container" style="padding-top: 2rem;">
+    <div class="section-header">
+      <div>
+        <h2 class="section-title">System Architecture &amp; Specifications</h2>
+        <p class="section-subtitle">End-to-end design blueprint of the EduTech platform</p>
+      </div>
+    </div>
+
+    <!-- Architecture Visual Blueprint -->
+    <div class="stat-card" style="text-align: left; padding: 2rem; margin-bottom: 2rem;">
+      <h3 style="font-size: 1.3rem; font-weight: 700; color: var(--accent-cyan); margin-bottom: 1rem;">
+        Multi-Tier Application Topology
+      </h3>
+      <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 1.5rem;">
+        The full codebase is structured around a resilient microservices architecture that can be orchestrated locally via Docker Compose or deployed to serverless environments:
+      </p>
+
+      <div style="background: #04060a; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.5rem; font-family: var(--font-mono); font-size: 0.88rem; line-height: 1.7; overflow-x: auto; color: #38bdf8;">
+        ┌─────────────────────────────────────────────────────────────────┐<br>
+        │                     Next.js 16 Turbopack (App)                  │<br>
+        │   • Server Components (RSC)      • Interactive Classroom Player │<br>
+        │   • Server Actions               • Student Progress Tracking    │<br>
+        └───────────────────────────────┬─────────────────────────────────┘<br>
+                                        │ Prisma ORM Connection Pool<br>
+        ┌───────────────────────────────▼─────────────────────────────────┐<br>
+        │                  PostgreSQL 16 Relational Engine                │<br>
+        │   • Courses, Lessons, Users      • pgvector Dense Embeddings    │<br>
+        │   • HNSW Vector Indexes          • Zero-Downtime Migrations     │<br>
+        └───────────────────────────────┬─────────────────────────────────┘<br>
+                                        │ Docker Socket (Isolated Bridge)<br>
+        ┌───────────────────────────────▼─────────────────────────────────┐<br>
+        │                   Sandboxed Container Runtime                   │<br>
+        │   • Non-root User Isolation      • Memory &amp; CPU Hard Quotas     │<br>
+        │   • 10-Second Timeouts           • Real-time Test Suite Runner  │<br>
+        └─────────────────────────────────────────────────────────────────┘
+      </div>
+    </div>
+
+    <!-- REST API Endpoints Specs -->
+    <div class="stat-card" style="text-align: left; padding: 2rem; margin-bottom: 4rem;">
+      <h3 style="font-size: 1.3rem; font-weight: 700; color: var(--accent-purple); margin-bottom: 1rem;">
+        REST API Endpoints Overview
+      </h3>
+      <table style="width: 100%; border-collapse: collapse; font-size: 0.88rem; text-align: left;">
+        <thead>
+          <tr style="border-bottom: 1px solid var(--border-subtle); color: var(--text-muted);">
+            <th style="padding: 0.75rem 0.5rem;">Method</th>
+            <th style="padding: 0.75rem 0.5rem;">Route</th>
+            <th style="padding: 0.75rem 0.5rem;">Description</th>
+          </tr>
+        </thead>
+        <tbody style="color: var(--text-secondary);">
+          <tr style="border-bottom: 1px solid var(--border-subtle);">
+            <td style="padding: 0.75rem 0.5rem;"><span class="badge badge-success">GET</span></td>
+            <td style="padding: 0.75rem 0.5rem;"><code style="color: var(--accent-cyan); font-family: var(--font-mono);">/api/courses</code></td>
+            <td style="padding: 0.75rem 0.5rem;">Fetch published courses with instructor &amp; rating data</td>
+          </tr>
+          <tr style="border-bottom: 1px solid var(--border-subtle);">
+            <td style="padding: 0.75rem 0.5rem;"><span class="badge badge-info">POST</span></td>
+            <td style="padding: 0.75rem 0.5rem;"><code style="color: var(--accent-cyan); font-family: var(--font-mono);">/api/sandbox/run</code></td>
+            <td style="padding: 0.75rem 0.5rem;">Executes student code inside isolated Docker container</td>
+          </tr>
+          <tr style="border-bottom: 1px solid var(--border-subtle);">
+            <td style="padding: 0.75rem 0.5rem;"><span class="badge badge-info">POST</span></td>
+            <td style="padding: 0.75rem 0.5rem;"><code style="color: var(--accent-cyan); font-family: var(--font-mono);">/api/search</code></td>
+            <td style="padding: 0.75rem 0.5rem;">Hybrid semantic search with pgvector and Reciprocal Rank Fusion</td>
+          </tr>
+          <tr>
+            <td style="padding: 0.75rem 0.5rem;"><span class="badge badge-purple">GET</span></td>
+            <td style="padding: 0.75rem 0.5rem;"><code style="color: var(--accent-cyan); font-family: var(--font-mono);">/api/openapi.json</code></td>
+            <td style="padding: 0.75rem 0.5rem;">Full OpenAPI 3.1 specification schema</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- =======================================================================
+       SITE FOOTER
+       ======================================================================= -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+            <div class="brand-icon-box" style="width: 1.8rem; height: 1.8rem; font-size: 0.85rem;">⚡</div>
+            <strong style="color: var(--text-primary); font-size: 1.1rem;">EduTech Academy</strong>
+          </div>
+          <p style="color: var(--text-secondary); max-width: 400px; line-height: 1.6; margin-bottom: 1.25rem;">
+            An open-source educational technology platform demonstrating production-ready architecture, containerized microservices, and hybrid AI learning.
+          </p>
+          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+            <span class="badge badge-info">Open Source</span>
+            <span class="badge badge-purple">MIT License</span>
+            <span class="badge badge-success">GitHub Pages Live</span>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Platform Navigation</h4>
+          <ul>
+            <li><a href="#courses" onclick="switchTab('courses')">Course Catalog</a></li>
+            <li><a href="#classroom" onclick="switchTab('classroom')">Interactive Classroom</a></li>
+            <li><a href="#dashboard" onclick="switchTab('dashboard')">Student Dashboard</a></li>
+            <li><a href="#sandbox" onclick="switchTab('sandbox')">In-Browser Sandbox</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Open Source &amp; Links</h4>
+          <ul>
+            <li><a href="https://github.com/harikrishna28102002-droid/edutech" target="_blank">GitHub Repository</a></li>
+            <li><a href="https://github.com/harikrishna28102002-droid" target="_blank">Creator Profile</a></li>
+            <li><a href="#docs" onclick="switchTab('docs')">System Architecture</a></li>
+            <li><a href="#ai" onclick="switchTab('ai')">AI Assistant</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          &copy; 2026 <strong>EduTech Academy</strong> • Created by <a href="https://github.com/harikrishna28102002-droid" target="_blank" style="color: var(--accent-cyan); text-decoration: none; font-weight: 600;">harikrishna28102002-droid</a>
+        </div>
+        <div style="display: flex; gap: 1rem; align-items: center;">
+          <span style="color: var(--text-muted);">Hosted for free on <strong>GitHub Pages</strong></span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Script -->
+  <script src="./app.js"></script>
+</body>
+</html>
